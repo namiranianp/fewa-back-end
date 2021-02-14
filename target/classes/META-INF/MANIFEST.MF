@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: pedramaranian
+Build-Jdk: 11.0.1
+Implementation-Title: fewa-back-end
+Implementation-Version: 1.0-SNAPSHOT
+Implementation-Vendor-Id: com.usf
+Implementation-URL: http://www.example.com
+Created-By: Maven Integration for Eclipse
+
