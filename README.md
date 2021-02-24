@@ -8,7 +8,7 @@ ___
 
 ### CORS and Communicating Between the Front End and Back End
 
-#### The back end and front end communicate via requests that have to come from specific sources.\
+#### The back end and front end communicate via requests that have to come from specific sources.
 In this case, information from the back end can only be read from [http://localhost:3000/](http://localhost:3000/).
 
 ___
