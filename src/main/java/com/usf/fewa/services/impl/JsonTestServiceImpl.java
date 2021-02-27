@@ -6,11 +6,14 @@ public class JsonTestServiceImpl implements JsonTestService {
 
 	@Override
 	public String returnService() {
-		return "{\r\n"
-				+ "\t{\"name\":\"file.txt\", \"type\": \"file\"},\r\n"
-				+ "\t{\"name\":\"file.pdf\", \"type\": \"file\"},\r\n"
-				+ "\t{\"name\":\"file.mp3\", \"type\": \"file\"},\r\n"
-				+ "\t{\"name\":\"/folder\", \"type\": \"directory\"}\r\n"
-				+ "}";
+		return "{\"files\":["
+				+ "{\"name\":\"file.txt\", \"type\":\"file\"},"
+				+ "{\"name\":\"file.pdf\", \"type\":\"file\"},"
+				+ "{\"name\":\"file.jpeg\", \"type\":\"file\"},"
+				+ "{\"name\":\"file.png\", \"type\":\"file\"},"
+				+ "{\"name\":\"file.mp4\", \"type\":\"file\"},"
+				+ "{\"name\":\"file\", \"type\":\"file\"},"
+				+ "{\"name\":\"/folder\", \"type\":\"directory\"}"
+				+ "]}";
 	}
 }
