@@ -18,8 +18,8 @@ public class JsonTestController {
 
 	@CrossOrigin(origins = "http://localhost")
 	@GetMapping(value = "/jsontest", produces = "application/json")
-	public String home(@RequestParam(value = "msg", defaultValue = "Hello, Json!") String msg) {
-		return jsonTestService.returnService(msg);
+	public String home() {
+		return jsonTestService.returnService();
 	}
 
 }

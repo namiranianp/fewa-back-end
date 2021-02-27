@@ -8,6 +8,6 @@ public interface JsonTestService {
 	 * @param msg Any String
 	 * @return The String you passed in as msg
 	 */
-	public String returnService(String msg);
+	public String returnService();
 
 }
