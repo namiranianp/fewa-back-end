@@ -6,7 +6,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
+import com.usf.fewa.services.JsonTestService;
 import com.usf.fewa.services.TestService;
+import com.usf.fewa.services.impl.JsonTestServiceImpl;
 import com.usf.fewa.services.impl.TestServiceImpl;
 
 @Configuration
@@ -14,6 +16,11 @@ public class AppConfig {
 	@Bean
 	public TestService testService() {
 		return new TestServiceImpl();
+	}
+	
+	@Bean
+	public JsonTestService jsonTestService() {
+		return new JsonTestServiceImpl();
 	}
 
 	@Bean
