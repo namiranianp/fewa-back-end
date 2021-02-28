@@ -7,13 +7,13 @@ public class JsonTestServiceImpl implements JsonTestService {
 	@Override
 	public String returnService() {
 		return "{\"files\":["
-				+ "{\"name\":\"file\", \"type\":\"file\", \"extension\":\"txt\"},"
-				+ "{\"name\":\"file\", \"type\":\"file\", \"extension\":\"pdf\"},"
-				+ "{\"name\":\"file\", \"type\":\"file\", \"extension\":\"jpeg\"},"
-				+ "{\"name\":\"file\", \"type\":\"file\", \"extension\":\"png\"},"
-				+ "{\"name\":\"file\", \"type\":\"file\", \"extension\":\"mp4\"},"
-				+ "{\"name\":\"file\", \"type\":\"file\", \"extension\":\"\"},"
-				+ "{\"name\":\"file\", \"type\":\"directory\", \"extension\":\"\"}"
+				+ "{\"fullName\":\"file.txt\", \"type\":\"file\", \"extension\":\"txt\"},"
+				+ "{\"fullName\":\"file.pdf\", \"type\":\"file\", \"extension\":\"pdf\"},"
+				+ "{\"fullName\":\"file.jpeg\", \"type\":\"file\", \"extension\":\"jpeg\"},"
+				+ "{\"fullName\":\"file.png\", \"type\":\"file\", \"extension\":\"png\"},"
+				+ "{\"fullName\":\"file.mp4\", \"type\":\"file\", \"extension\":\"mp4\"},"
+				+ "{\"fullName\":\"file\", \"type\":\"file\", \"extension\":\"\"},"
+				+ "{\"fullName\":\"/folder\", \"type\":\"directory\", \"extension\":\"\"}"
 				+ "]}";
 	}
 }
