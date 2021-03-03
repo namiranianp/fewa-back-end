@@ -1,9 +1,11 @@
-spring:
-  jpa:
-    hibernate:
-      ddl-auto: create
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-  datasource:
-    url: "jdbc:postgresql://localhost:5432/postgres"
+spring:  
+  jpa:  
+    hibernate:  
+      ddl-auto: create  
+    properties:      hibernate:        temp:          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  
+  datasource:  
+    url: "jdbc:postgresql://localhost:5432/postgres"  
     username: postgres
-    password: 00000000
+    password: 1234
+    driver-class-name: org.postgresql.Driver
