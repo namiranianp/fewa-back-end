@@ -22,15 +22,20 @@ public class ViewingObject {
 	@ManyToMany(targetEntity=Tag.class,cascade=CascadeType.PERSIST)
 	private Set<Tag> tagSet;
 	
-	public ViewingObject() {
+	protected ViewingObject() {
 		
 	}
+	
 	public ViewingObject(String name, String path, Owner owner) {
 		this.name = name;
 		this.path = path;
 		this.owner = owner;
 	}
-
+	
+	public int getId() {
+		return vid;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -61,6 +66,12 @@ public class ViewingObject {
 
 	public void setTagSet(Set<Tag> tagSet) {
 		this.tagSet = tagSet;
+	}
+
+	@Override
+	public String toString() {
+		return "ViewingObject [vid=" + vid + ", name=" + name + ", path=" + path + ", owner=" + owner + ", tagSet="
+				+ tagSet + "]";
 	}
 
 }

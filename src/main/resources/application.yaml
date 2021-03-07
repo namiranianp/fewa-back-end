@@ -2,7 +2,12 @@ spring:
   jpa:  
     hibernate:  
       ddl-auto: create  
-    properties:      hibernate:        temp:          use_jdbc_metadata_defaults: false
+    properties:      hibernate:
+        jdbc:
+          batch_size: 50
+          batch_versioned_data: true
+          order_inserts: true
+    
     database-platform: org.hibernate.dialect.PostgreSQLDialect  
   datasource:  
     url: "jdbc:postgresql://localhost:5432/postgres"  

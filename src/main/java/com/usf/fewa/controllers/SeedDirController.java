@@ -23,7 +23,7 @@ public class SeedDirController {
 	@GetMapping(value = "/seed")
 	public void setSeed(@RequestParam(value = "dir", defaultValue = "/") String dir) {
 		try {
-			seedDirService.fileFetch(dir, new Owner("login", "pssword"));
+			seedDirService.fileFetch(dir, null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

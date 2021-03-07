@@ -3,18 +3,23 @@ package com.usf.fewa.services.impl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.usf.fewa.entity.Owner;
 import com.usf.fewa.entity.ViewingObject;
+import com.usf.fewa.repository.ViewingObjectRepository;
 import com.usf.fewa.services.SeedDirService;
 
 
 public class SeedDirServiceimpl implements SeedDirService{
+	
+	@Autowired
+	private ViewingObjectRepository repository;
+	
 	@Override
 	/**
 	 * Fetch all files from a path(String)
@@ -24,19 +29,15 @@ public class SeedDirServiceimpl implements SeedDirService{
 	 */
 	public void fileFetch(String path, Owner user) throws IOException{
 		Path rootpath = Path.of(path);
-		EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("EntityFactory");
-		EntityManager entitymanager = emfactory.createEntityManager( );
-		entitymanager.getTransaction( ).begin( );
 		if (Files.isDirectory(rootpath)) {
 			try (Stream<Path> paths = Files.walk(rootpath)) {
-				paths.forEach(p -> entitymanager.persist(new ViewingObject(p.getFileName().toString(), p.toAbsolutePath().toString(), user))); 
+				List<ViewingObject> viewingObjects = new ArrayList<>();
+				paths.forEach(p -> viewingObjects.add(new ViewingObject(p.getFileName().toString(), p.toAbsolutePath().toString(), user))); 
+				repository.saveAll(viewingObjects);
 			}
 		} else {
-			entitymanager.persist(new ViewingObject(rootpath.getFileName().toString(), rootpath.toAbsolutePath().toString(), user));
+			repository.save(new ViewingObject(rootpath.getFileName().toString(), rootpath.toAbsolutePath().toString(), user));
 		}
-		entitymanager.getTransaction().commit();
-		entitymanager.close();
-		emfactory.close();
 	}
 
 }
