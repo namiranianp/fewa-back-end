@@ -22,7 +22,7 @@ public class Tag {
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Owner owner;
 	
-	@ManyToMany(targetEntity=ViewingObject.class)
+	@ManyToMany(mappedBy = "tagSet")
 	private Set<ViewingObject> viewingObjSet;
 
 	public Tag() {

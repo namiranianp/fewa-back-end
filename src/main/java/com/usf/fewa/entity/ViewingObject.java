@@ -16,10 +16,11 @@ public class ViewingObject {
 	
 	private String path;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Owner owner;
 	
-	@ManyToMany(targetEntity=Tag.class,cascade=CascadeType.PERSIST)
+	@ManyToMany(targetEntity = Tag.class,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "viewingobject_tag", joinColumns = @JoinColumn(name = "vid"), inverseJoinColumns = @JoinColumn(name = "tid"))
 	private Set<Tag> tagSet;
 	
 	protected ViewingObject() {
