@@ -15,7 +15,7 @@ import com.usf.fewa.repository.ViewingObjectRepository;
 import com.usf.fewa.services.SeedDirService;
 
 
-public class SeedDirServiceimpl implements SeedDirService{
+public class SeedDirServiceImpl implements SeedDirService{
 	
 	@Autowired
 	private ViewingObjectRepository repository;

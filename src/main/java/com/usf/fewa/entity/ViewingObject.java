@@ -1,5 +1,6 @@
 package com.usf.fewa.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ public class ViewingObject {
 	
 	@ManyToMany(targetEntity = Tag.class,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "viewingobject_tag", joinColumns = @JoinColumn(name = "vid"), inverseJoinColumns = @JoinColumn(name = "tid"))
-	private Set<Tag> tagSet;
+	private Set<Tag> tagSet = new HashSet<>();
 	
 	protected ViewingObject() {
 		
@@ -67,6 +68,16 @@ public class ViewingObject {
 
 	public void setTagSet(Set<Tag> tagSet) {
 		this.tagSet = tagSet;
+	}
+	
+	public void addTag(Tag tag) {
+		tagSet.add(tag);
+		tag.getViewingObjSet().add(this);
+	}
+	
+	public void removeTag(Tag tag) {
+		tagSet.remove(tag);
+		tag.getViewingObjSet().remove(this);
 	}
 
 	@Override

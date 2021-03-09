@@ -1,5 +1,6 @@
 package com.usf.fewa.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -23,7 +24,7 @@ public class Tag {
 	private Owner owner;
 	
 	@ManyToMany(mappedBy = "tagSet")
-	private Set<ViewingObject> viewingObjSet;
+	private Set<ViewingObject> viewingObjSet = new HashSet<>();
 
 	public Tag() {
 		
@@ -56,6 +57,11 @@ public class Tag {
 
 	public void setViewingObjSet(Set<ViewingObject> viewingObjSet) {
 		this.viewingObjSet = viewingObjSet;
+	}
+
+	@Override
+	public String toString() {
+		return "Tag [tid=" + tid + ", name=" + name + ", owner=" + owner + ", viewingObjSet=" + viewingObjSet + "]";
 	}
 	
 
