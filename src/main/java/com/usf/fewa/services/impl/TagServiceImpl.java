@@ -22,7 +22,7 @@ public class TagServiceImpl implements TagService {
 		ViewingObject vo = viewingObjectRepository.getByPath(filePath);
 		
 		if (vo == null) {
-			// exception
+			// TODO: exception handle
 		}
 		Tag tag = tagRepository.getByName(tagName);
 		if (tag == null) {
@@ -35,8 +35,15 @@ public class TagServiceImpl implements TagService {
 	}
 
 	@Override
-	public void removeTag(String filename, String tag, Owner owner) {
-		// TODO Auto-generated method stub
+	public void removeTag(String filePath, String tagName, Owner owner) {
+		ViewingObject vo = viewingObjectRepository.getByPath(filePath);
+		
+		if (vo == null) {
+			//TODO: exception handle
+		}
+		Tag tag = tagRepository.getByName(tagName);
+		vo.removeTag(tag);
+		viewingObjectRepository.save(vo);
 		
 	}
 
