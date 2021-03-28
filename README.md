@@ -22,6 +22,12 @@ POST /tag/add/?tagName={tag}&filePath={path}
 ```
 where tag is the name of tag and path is the path of the file.
 
+## Remove a Tag from a file
+```
+DELETE /tag/remove/?tagName={tag}&filePath={path}
+```
+where tag is the name of tag and path is the path of the file.
+
 ## Get File Content
 ```
 GET /file/?file={path}
