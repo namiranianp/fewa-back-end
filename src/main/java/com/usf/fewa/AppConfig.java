@@ -12,6 +12,7 @@ import com.usf.fewa.services.MP4ContentService;
 import com.usf.fewa.services.PDFContentService;
 import com.usf.fewa.services.PNGContentService;
 import com.usf.fewa.services.TXTContentService;
+import com.usf.fewa.services.TagTestService;
 import com.usf.fewa.services.TestService;
 import com.usf.fewa.services.impl.JPEGContentServiceImpl;
 import com.usf.fewa.services.impl.JsonTestServiceImpl;
@@ -19,6 +20,7 @@ import com.usf.fewa.services.impl.MP4ContentServiceImpl;
 import com.usf.fewa.services.impl.PDFContentServiceImpl;
 import com.usf.fewa.services.impl.PNGContentServiceImpl;
 import com.usf.fewa.services.impl.TXTContentServiceImpl;
+import com.usf.fewa.services.impl.TagTestServiceImpl;
 import com.usf.fewa.services.impl.TestServiceImpl;
 
 @Configuration
@@ -56,6 +58,11 @@ public class AppConfig {
 	@Bean
 	public TXTContentService txtContentService() {
 		return new TXTContentServiceImpl();
+	}
+	
+	@Bean
+	public TagTestService tagTestService() {
+		return new TagTestServiceImpl();
 	}
 
 	@Bean
