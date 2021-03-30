@@ -18,6 +18,18 @@ public class TagTestServiceImpl implements TagTestService {
 		PNGtags.add("png");
 		TXTtags.add("txt");
 		
+		JPEGtags.add("test");
+		MP4tags.add("test");
+		PDFtags.add("test");
+		PNGtags.add("test");
+		TXTtags.add("test");
+		
+		JPEGtags.add("delete me");
+		MP4tags.add("delete me");
+		PDFtags.add("delete me");
+		PNGtags.add("delete me");
+		TXTtags.add("delete me");
+		
 	}
 	
 	@Override
@@ -27,8 +39,8 @@ public class TagTestServiceImpl implements TagTestService {
 		
 		if(tag.startsWith("jpeg-addTag-")) {
 			
-			if(!JPEGtags.contains(tag.substring(7))) {
-				JPEGtags.add(tag.substring(7));
+			if(!JPEGtags.contains(tag.substring(12))) {
+				JPEGtags.add(tag.substring(12));
 			}
 			
 			output += "{\"tags\":[";
@@ -44,8 +56,8 @@ public class TagTestServiceImpl implements TagTestService {
 		}
 		if(tag.startsWith("mp4-addTag-")) {
 			
-			if(!MP4tags.contains(tag.substring(7))) {
-				MP4tags.add(tag.substring(7));
+			if(!MP4tags.contains(tag.substring(11))) {
+				MP4tags.add(tag.substring(11));
 			}
 			
 			output += "{\"tags\":[";
@@ -61,8 +73,8 @@ public class TagTestServiceImpl implements TagTestService {
 		}
 		if(tag.startsWith("pdf-addTag-")) {
 			
-			if(!PDFtags.contains(tag.substring(7))) {
-				PDFtags.add(tag.substring(7));
+			if(!PDFtags.contains(tag.substring(11))) {
+				PDFtags.add(tag.substring(11));
 			}
 			
 			output += "{\"tags\":[";
@@ -78,8 +90,8 @@ public class TagTestServiceImpl implements TagTestService {
 		}
 		if(tag.startsWith("png-addTag-")) {
 			
-			if(!PNGtags.contains(tag.substring(7))) {
-				PNGtags.add(tag.substring(7));
+			if(!PNGtags.contains(tag.substring(11))) {
+				PNGtags.add(tag.substring(11));
 			}
 			
 			output += "{\"tags\":[";
@@ -95,8 +107,8 @@ public class TagTestServiceImpl implements TagTestService {
 		}
 		if(tag.startsWith("txt-addTag-")) {
 			
-			if(!TXTtags.contains(tag.substring(7))) {
-				TXTtags.add(tag.substring(7));
+			if(!TXTtags.contains(tag.substring(11))) {
+				TXTtags.add(tag.substring(11));
 			}
 			
 			output += "{\"tags\":[";
@@ -115,8 +127,8 @@ public class TagTestServiceImpl implements TagTestService {
 		
 		if(tag.startsWith("jpeg-deleteTag-")) {
 			
-			if(JPEGtags.contains(tag.substring(10))) {
-				JPEGtags.remove(tag.substring(10));
+			if(JPEGtags.contains(tag.substring(15))) {
+				JPEGtags.remove(tag.substring(15));
 			}
 			
 			output += "{\"tags\":[";
@@ -132,8 +144,8 @@ public class TagTestServiceImpl implements TagTestService {
 		}
 		if(tag.startsWith("mp4-deleteTag-")) {
 			
-			if(MP4tags.contains(tag.substring(10))) {
-				MP4tags.remove(tag.substring(10));
+			if(MP4tags.contains(tag.substring(14))) {
+				MP4tags.remove(tag.substring(14));
 			}
 			
 			output += "{\"tags\":[";
@@ -149,8 +161,8 @@ public class TagTestServiceImpl implements TagTestService {
 		}
 		if(tag.startsWith("pdf-deleteTag-")) {
 			
-			if(PDFtags.contains(tag.substring(10))) {
-				PDFtags.remove(tag.substring(10));
+			if(PDFtags.contains(tag.substring(14))) {
+				PDFtags.remove(tag.substring(14));
 			}
 			
 			output += "{\"tags\":[";
@@ -166,8 +178,8 @@ public class TagTestServiceImpl implements TagTestService {
 		}
 		if(tag.startsWith("png-deleteTag-")) {
 			
-			if(PNGtags.contains(tag.substring(10))) {
-				PNGtags.remove(tag.substring(10));
+			if(PNGtags.contains(tag.substring(14))) {
+				PNGtags.remove(tag.substring(14));
 			}
 			
 			output += "{\"tags\":[";
@@ -183,8 +195,8 @@ public class TagTestServiceImpl implements TagTestService {
 		}
 		if(tag.startsWith("txt-deleteTag-")) {
 			
-			if(TXTtags.contains(tag.substring(10))) {
-				TXTtags.remove(tag.substring(10));
+			if(TXTtags.contains(tag.substring(14))) {
+				TXTtags.remove(tag.substring(14));
 			}
 		
 			output += "{\"tags\":[";
