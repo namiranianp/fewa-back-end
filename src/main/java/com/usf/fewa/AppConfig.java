@@ -6,9 +6,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
+import com.usf.fewa.services.PreviewService;
 import com.usf.fewa.services.SeedDirService;
 import com.usf.fewa.services.TagService;
 import com.usf.fewa.services.TestService;
+import com.usf.fewa.services.impl.PreviewServiceImpl;
 import com.usf.fewa.services.impl.SeedDirServiceImpl;
 import com.usf.fewa.services.impl.TagServiceImpl;
 import com.usf.fewa.services.impl.TestServiceImpl;
@@ -28,6 +30,11 @@ public class AppConfig {
 	@Bean
 	public TagService tagService() {
 		return new TagServiceImpl();
+	}
+	
+	@Bean
+	public PreviewService previewService() {
+		return new PreviewServiceImpl();
 	}
 
 	@Bean
