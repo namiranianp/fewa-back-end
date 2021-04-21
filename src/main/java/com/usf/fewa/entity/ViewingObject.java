@@ -6,7 +6,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
-@Table(name="viewingobject")
+@Table(name="viewingobject", uniqueConstraints = {@UniqueConstraint(columnNames = "path")})
 public class ViewingObject {
 
 	@Id 
@@ -15,6 +15,7 @@ public class ViewingObject {
 	
 	private String name;
 	
+	@Column(unique=true)
 	private String path;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)

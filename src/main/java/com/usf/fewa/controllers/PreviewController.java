@@ -1,17 +1,9 @@
 package com.usf.fewa.controllers;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,6 +34,10 @@ public class PreviewController {
 	
 	@RequestMapping(value = "jpeg", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
 	public @ResponseBody byte[] getJPEG(@RequestParam(value = "file") String file) throws IOException{
+		return previewService.preview(file);
+	}
+	@RequestMapping(value = "png", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+	public @ResponseBody byte[] getPNG(@RequestParam(value = "file") String file) throws IOException{
 		return previewService.preview(file);
 	}
 	
