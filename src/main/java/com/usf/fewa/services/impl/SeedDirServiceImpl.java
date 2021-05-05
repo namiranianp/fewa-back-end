@@ -1,8 +1,10 @@
 package com.usf.fewa.services.impl;
 
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -30,15 +32,15 @@ public class SeedDirServiceImpl implements SeedDirService{
 	 * @throws IOException if an IO error occurs
 	 */
 	public void fileFetch(String path, Owner user) throws IOException{
-		if (repository.getByPath(path) != null) {
-			System.out.println("find same");
-			return;
-		}
+//		if (repository.getByPath(path) != null) {
+//			System.out.println("find same");
+//			return;
+//		}
 		Path rootpath = Path.of(path);
 		if (Files.isDirectory(rootpath)) {
 			try (Stream<Path> paths = Files.walk(rootpath)) {
 				List<ViewingObject> viewingObjects = new ArrayList<>();
-				paths.forEach(p -> viewingObjects.add(new ViewingObject(p.getFileName().toString(), p.toAbsolutePath().toString(), user))); 
+				paths.filter(n -> repository.getByPath(n.toString()) == null).forEach(p -> viewingObjects.add(new ViewingObject(p.getFileName().toString(), p.toAbsolutePath().toString(), user))); 
 				repository.saveAll(viewingObjects);
 			}
 		} else {
@@ -46,19 +48,20 @@ public class SeedDirServiceImpl implements SeedDirService{
 		}
 	}
 	public String listFileToJson(String path) throws IOException {
-		System.out.println(path);
-		List<ViewingObject> list = repository.findByPathLike(path.replace("\\", "\\\\") + "%_");
+		List<ViewingObject> list = repository.findByPathLike(path.replace(FileSystems.getDefault().getSeparator(), "\\" + FileSystems.getDefault().getSeparator()) + "%_");//should test for Unix system
+		list.removeIf(e -> !e.isVisible());
+		list.removeIf(vo -> vo.getPath().compareTo(path + FileSystems.getDefault().getSeparator() + vo.getName()) != 0);
 		String res = "{\"files\":[";
 		Iterator<ViewingObject> it = list.iterator();
-		res += getOnefileJson(it.next());
+		if (it.hasNext()) {
+			res += getOnefileJson(it.next());
+		}
 		while (it.hasNext()) {
 			res += ",";
 			res += getOnefileJson(it.next());
 		}
 		res += "]}";
 		return res;
-				
-				
 	}
 	private String getOnefileJson(ViewingObject vo) {
 		String filename = vo.getName();

@@ -12,17 +12,27 @@ import org.springframework.web.bind.annotation.RestController;
 import com.usf.fewa.services.SeedDirService;
 
 @RestController
-@RequestMapping(value = "/seed")
+@RequestMapping(value = "/path")
 public class SeedDirController {
 	
 	@Autowired
 	SeedDirService seedDirService;
 
 	@CrossOrigin(origins = "http://localhost")
-	@GetMapping(path = "/", produces = "application/json")
+	@GetMapping(path = "/setseed", produces = "application/json")
 	public String setSeed(@RequestParam(value = "dir", defaultValue = "/") String dir) {
 		try {
 			seedDirService.fileFetch(dir, null);
+			return seedDirService.listFileToJson(dir);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return e.getMessage();
+		}
+	}
+	@GetMapping(path = "/getfiles", produces = "application/json")
+	public String getDirFiles(@RequestParam(value = "dir") String dir) {
+		try {
 			return seedDirService.listFileToJson(dir);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

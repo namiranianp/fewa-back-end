@@ -1,5 +1,7 @@
 package com.usf.fewa.entity;
 
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,8 +20,12 @@ public class ViewingObject {
 	@Column(unique=true)
 	private String path;
 	
+	private String upper;
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Owner owner;
+	
+	private boolean visible = true;
 	
 	@ManyToMany(targetEntity = Tag.class,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "viewingobject_tag", joinColumns = @JoinColumn(name = "vid"), inverseJoinColumns = @JoinColumn(name = "tid"))
@@ -33,6 +39,8 @@ public class ViewingObject {
 		this.name = name;
 		this.path = path;
 		this.owner = owner;
+		String[] dirs = path.split("\\" + FileSystems.getDefault().getSeparator());
+		this.upper = dirs[dirs.length - 2];
 	}
 	
 	public int getId() {
@@ -54,6 +62,10 @@ public class ViewingObject {
 	public void setPath(String path) {
 		this.path = path;
 	}
+	
+	public String getUpper() {
+		return upper;
+	}
 
 	public Owner getOwner() {
 		return owner;
@@ -61,6 +73,14 @@ public class ViewingObject {
 
 	public void setOwner(Owner owner) {
 		this.owner = owner;
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setInvisible() {
+		this.visible = false;
 	}
 
 	public Set<Tag> getTagSet() {
