@@ -19,8 +19,6 @@ public class ViewingObject {
 	
 	@Column(unique=true)
 	private String path;
-	
-	private String upper;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Owner owner;
@@ -39,8 +37,6 @@ public class ViewingObject {
 		this.name = name;
 		this.path = path;
 		this.owner = owner;
-		String[] dirs = path.split("\\" + FileSystems.getDefault().getSeparator());
-		this.upper = dirs[dirs.length - 2];
 	}
 	
 	public int getId() {
@@ -63,9 +59,6 @@ public class ViewingObject {
 		this.path = path;
 	}
 	
-	public String getUpper() {
-		return upper;
-	}
 
 	public Owner getOwner() {
 		return owner;
