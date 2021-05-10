@@ -1,48 +1,46 @@
 package com.usf.fewa.entity;
 
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="viewingobject", uniqueConstraints = {@UniqueConstraint(columnNames = "path")})
+@Table(name = "viewingobject", uniqueConstraints = { @UniqueConstraint(columnNames = "path") })
 public class ViewingObject {
 
-	@Id 
-	@GeneratedValue( strategy=GenerationType.AUTO )
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int vid;
-	
+
 	private String name;
-	
-	@Column(unique=true)
+
+	@Column(unique = true)
 	private String path;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Owner owner;
-	
+
 	private boolean visible = true;
-	
-	@ManyToMany(targetEntity = Tag.class,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+	@ManyToMany(targetEntity = Tag.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "viewingobject_tag", joinColumns = @JoinColumn(name = "vid"), inverseJoinColumns = @JoinColumn(name = "tid"))
 	private Set<Tag> tagSet = new HashSet<>();
-	
+
 	protected ViewingObject() {
-		
+
 	}
-	
+
 	public ViewingObject(String name, String path, Owner owner) {
 		this.name = name;
 		this.path = path;
 		this.owner = owner;
 	}
-	
+
 	public int getId() {
 		return vid;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -58,7 +56,6 @@ public class ViewingObject {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
 
 	public Owner getOwner() {
 		return owner;
@@ -83,12 +80,12 @@ public class ViewingObject {
 	public void setTagSet(Set<Tag> tagSet) {
 		this.tagSet = tagSet;
 	}
-	
+
 	public void addTag(Tag tag) {
 		tagSet.add(tag);
 		tag.getViewingObjSet().add(this);
 	}
-	
+
 	public void removeTag(Tag tag) {
 		tagSet.remove(tag);
 		tag.getViewingObjSet().remove(this);

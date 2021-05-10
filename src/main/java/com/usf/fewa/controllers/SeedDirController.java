@@ -14,7 +14,7 @@ import com.usf.fewa.services.SeedDirService;
 @RestController
 @RequestMapping(value = "/path")
 public class SeedDirController {
-	
+
 	@Autowired
 	SeedDirService seedDirService;
 
@@ -25,17 +25,16 @@ public class SeedDirController {
 			seedDirService.fileFetch(dir, null);
 			return seedDirService.listFileToJson(dir);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return e.getMessage();
 		}
 	}
+
 	@GetMapping(path = "/getfiles", produces = "application/json")
 	public String getDirFiles(@RequestParam(value = "dir") String dir) {
 		try {
 			return seedDirService.listFileToJson(dir);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return e.getMessage();
 		}

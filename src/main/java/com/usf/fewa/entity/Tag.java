@@ -14,27 +14,27 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Tag {
 
-	@Id 
-	@GeneratedValue( strategy=GenerationType.AUTO )
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int tid;
-	
+
 	private String name;
-	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Owner owner;
-	
+
 	@ManyToMany(mappedBy = "tagSet")
 	private Set<ViewingObject> viewingObjSet = new HashSet<>();
 
 	public Tag() {
-		
+
 	}
-	
+
 	public Tag(String name, Owner owner) {
 		this.name = name;
 		this.owner = owner;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -63,6 +63,5 @@ public class Tag {
 	public String toString() {
 		return "Tag [tid=" + tid + ", name=" + name + ", owner=" + owner + ", viewingObjSet=" + viewingObjSet + "]";
 	}
-	
 
 }

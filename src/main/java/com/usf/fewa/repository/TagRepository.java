@@ -7,7 +7,5 @@ import com.usf.fewa.entity.Tag;
 
 public interface TagRepository extends CrudRepository<Tag, Integer> {
 	Tag getByName(@Param("name") String name);
-	
-
-
+	//Tag getByNameContaining(@Param("name")String name);
 }
