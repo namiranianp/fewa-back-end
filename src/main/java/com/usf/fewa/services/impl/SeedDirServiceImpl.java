@@ -5,6 +5,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
@@ -49,6 +50,24 @@ public class SeedDirServiceImpl implements SeedDirService {
 
 	/**
 	 * List files and directories in json format such as ls command in the specific directory.
+	 * 
+	 * @param path the directory
+	 * @return the json format stirng
+	 * @throws IOException if an IO error occurs
+	 */
+	public String listFileToJson(String path) throws IOException {
+		List<ViewingObject> list = repository.findByPathLike(
+				path.replace(FileSystems.getDefault().getSeparator(), "\\" + FileSystems.getDefault().getSeparator())
+						+ "%_");// should test for Unix system
+		list.removeIf(e -> !e.isVisible());
+		list.removeIf(vo -> vo.getPath().compareTo(path + FileSystems.getDefault().getSeparator() + vo.getName()) != 0);
+		// C://desktop/d1/d2/test.txt   !=     C://desktop/d1 + / + test.txt
+		return listToJson(list);
+	}
+	
+	/**
+	 * List files and directories in json format as below:
+	 * 
 	 * for example:
 	 * {
 	    	"files": [
@@ -64,19 +83,13 @@ public class SeedDirServiceImpl implements SeedDirService {
 		        }
 		    ]
 		}
-	 * @param path the directory
-	 * @return the json format stirng
-	 * @throws IOException if an IO error occurs
+		
+		@param list the collection of files
+		@return json format
 	 */
-	public String listFileToJson(String path) throws IOException {
-		List<ViewingObject> list = repository.findByPathLike(
-				path.replace(FileSystems.getDefault().getSeparator(), "\\" + FileSystems.getDefault().getSeparator())
-						+ "%_");// should test for Unix system
-		list.removeIf(e -> !e.isVisible());
-		list.removeIf(vo -> vo.getPath().compareTo(path + FileSystems.getDefault().getSeparator() + vo.getName()) != 0);
-		// C://desktop/d1/d2/test.txt   !=     C://desktop/d1 + / + test.txt
+	public static String listToJson(Collection<? extends ViewingObject> list) {
 		String res = "{\"files\":[";
-		Iterator<ViewingObject> it = list.iterator();
+		Iterator<? extends ViewingObject> it = list.iterator();
 		if (it.hasNext()) {
 			res += getOnefileJson(it.next());
 		}
@@ -90,10 +103,11 @@ public class SeedDirServiceImpl implements SeedDirService {
 
 	/**
 	 * Generate one file json including: name, file or directory, extension. 
+	 * 
 	 * @param vo the file object
 	 * @return the json format string
 	 */
-	private String getOnefileJson(ViewingObject vo) {
+	public static String getOnefileJson(ViewingObject vo) {
 		String filename = vo.getName();
 		String DIR = "file";
 		if (Files.isDirectory(Path.of(vo.getPath()))) { // might modify to fileFetch
@@ -105,10 +119,11 @@ public class SeedDirServiceImpl implements SeedDirService {
 
 	/**
 	 * Get the file extension by filename.
+	 * 
 	 * @param filename the file name
 	 * @return the extension
 	 */
-	private String getExtensionByStringHandling(String filename) {
+	private static String getExtensionByStringHandling(String filename) {
 		int lastIndexOf = filename.lastIndexOf(".");
 		if (lastIndexOf == -1) {
 			return ""; // empty extension

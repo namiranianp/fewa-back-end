@@ -1,28 +1,28 @@
 package com.usf.fewa.services.impl;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import com.usf.fewa.entity.ViewingObject;
 import com.usf.fewa.repository.TagRepository;
 import com.usf.fewa.repository.ViewingObjectRepository;
 import com.usf.fewa.services.SearchService;
 
 public class SearchServiceImpl implements SearchService {
 
+	@Autowired
 	private ViewingObjectRepository viewingObjectRepository;
 
-	//private TagRepository tagRepository;
+	@Autowired
+	private TagRepository tagRepository;
 
-	public SearchServiceImpl() {
-		// TODO Auto-generated constructor stub
+
+	@Override
+	public String SearchByFileName(String fileName) {
+		return SeedDirServiceImpl.listToJson(viewingObjectRepository.findByNameContaining(fileName));
 	}
 
-	public List<ViewingObject> SearchByFileName(String fileName) {
-		return viewingObjectRepository.findByNameContaining(fileName);
-	}
-
-	public List<ViewingObject> SearchByTagName(String tagName) {
-		return viewingObjectRepository.findByNameContaining(tagName); //TODO
+	@Override
+	public String SearchByTagName(String tagName) {
+		return SeedDirServiceImpl.listToJson(tagRepository.getByName(tagName).getViewingObjSet());
 	}
 
 }
