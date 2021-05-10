@@ -12,24 +12,56 @@ The REST API to the example app is described below.
 
 ## Add Seed Directory to System
 ```
-POST /seed/?dir={path}
+GET /path/setseed/?dir={path}
 ```
 where path is the seed directroy path.
 
-## Add a Tag to a file
+## Get Files In a Directory
 ```
-POST /tag/add/?tagName={tag}&filePath={path}
+GET /path/getfiles/?dir={path}
+```
+where path is the target directory path.
+
+## Add a Tag To a File
+```
+GET /tag/add/?tagName={tag}&filePath={path}
 ```
 where tag is the name of tag and path is the path of the file.
 
 ## Remove a Tag from a file
 ```
-DELETE /tag/remove/?tagName={tag}&filePath={path}
+GET /tag/remove/?tagName={tag}&filePath={path}
 ```
 where tag is the name of tag and path is the path of the file.
 
+## Display a Tag from a file
+```
+GET /tag/display/?tagName={tag}
+```
+where tag is the name of tag.
+
 ## Get File Content
 ```
-GET /file/?file={path}
+GET /file/preview/?file={path}
 ```
 where path is the file location.
+
+## Search By File Name
+```
+GET /search/name/?file={filename}
+```
+where filename is the search query.
+
+## Search By Tag Name
+```
+GET /search/tag/?tag={tag}
+```
+where tag is the search query.
+
+## Delete File
+```
+GET /delete/?filePath={path}
+```
+where path is the file location.
+
+
