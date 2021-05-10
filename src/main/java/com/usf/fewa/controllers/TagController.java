@@ -2,9 +2,7 @@ package com.usf.fewa.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,13 +17,13 @@ public class TagController {
 	TagService tagService;
 
 	@CrossOrigin(origins = "http://localhost")
-	@PostMapping(path = "/add")
+	@GetMapping(path = "/add")
 	public void addTag(@RequestParam(value = "tagName") String tagName,
 			@RequestParam(value = "filePath") String filePath) {
 		tagService.addTag(filePath, tagName, null);
 	}
 
-	@DeleteMapping(path = "/remove")
+	@GetMapping(path = "/remove")
 	public void removeTag(@RequestParam(value = "tagName") String tagName,
 			@RequestParam(value = "filePath") String filePath) {
 		tagService.removeTag(filePath, tagName, null);
