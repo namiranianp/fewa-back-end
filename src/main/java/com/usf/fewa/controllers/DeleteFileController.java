@@ -7,19 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.usf.fewa.services.TestService;
+import com.usf.fewa.entity.ViewingObject;
+import com.usf.fewa.repository.ViewingObjectRepository;
 
 @RestController
-@RequestMapping(value = "/test")
-public class TestController {
+@RequestMapping(value = "delete")
+public class DeleteFileController {
 
 	@Autowired
-	TestService testService;
+	ViewingObjectRepository repository;
 
 	@CrossOrigin(origins = "http://localhost")
-	@GetMapping(value = "/test", produces = "application/json")
-	public String home(@RequestParam(value = "msg", defaultValue = "Hello, World!") String msg) {
-		return testService.returnService(msg);
+	@GetMapping(path = "/")
+	public void delete(@RequestParam(value = "filePath") String filePath) {
+		ViewingObject vo = repository.getByPath(filePath);
+		vo.setInvisible();
+		repository.save(vo);
 	}
 
 }

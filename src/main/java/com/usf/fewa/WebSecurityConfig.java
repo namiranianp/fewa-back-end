@@ -12,5 +12,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO not secure but needed for separate front/back end
 		http.csrf().disable();
+		http.headers().frameOptions().disable();
 	}
 }
