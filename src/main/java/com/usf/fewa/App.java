@@ -15,7 +15,7 @@ public class App implements WebMvcConfigurer {
 	}
 
 	/**
-	 * THIS IS ESSENTIAL TO BE ABLE TO ACCESS FILES OUTSIDE OF ROOT RESOURCE
+	 * THIS IS ESSENTIAL TO BE ABLE TO ACCESS FILES OUTSIDE OF ROOT RESOURCE Testing for Pedram's PR
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
