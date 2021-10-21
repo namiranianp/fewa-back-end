@@ -45,7 +45,7 @@ public class AppConfig {
 	}
 	
 	@Bean
-	public PreviewService downloadService() {
+	public DownloadService downloadService() {
 		return new DownloadServiceImpl();
 	}
 
