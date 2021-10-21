@@ -1,6 +1,8 @@
 package com.usf.fewa.controllers;
 
 import com.usf.fewa.services.impl.DownloadServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +15,13 @@ import com.usf.fewa.repository.ViewingObjectRepository;
 
 import com.usf.fewa.services.DownloadService;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping(value = "download")
 public class DownloadFileController {
+
+    private static Logger log = LogManager.getLogger("DownloadFileController");
 
 	@Autowired
     ViewingObjectRepository repository;
@@ -23,13 +29,20 @@ public class DownloadFileController {
 
 	@CrossOrigin(origins = "http://localhost")
 	@GetMapping(path = "/")
-	public void download(@RequestParam(value = "filePath") String filePath) {
+	public void download(@RequestParam(value = "filePath") String filePath){
         ViewingObject vo = repository.getByPath(filePath);
+        log.info("path = " + filePath);
         if(vo.isVisible()) {
             //Download file
-            downloadService.download(filePath);
+            try {
+                log.info("beginning download path = " + filePath);
+                downloadService.download(filePath);
+                log.info("dowload path success= " + filePath);
+            }catch(IOException ioe){
+                System.out.println("could not download file");
+            }
         } else {
-            //TODO file not found error
+            System.out.println("could not access file to download");
         }
 	}
 

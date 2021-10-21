@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.usf.fewa.entity.Owner;
@@ -18,6 +20,8 @@ import com.usf.fewa.repository.ViewingObjectRepository;
 import com.usf.fewa.services.SeedDirService;
 
 public class SeedDirServiceImpl implements SeedDirService {
+
+	private static Logger log = LogManager.getLogger("SeedDirServiceImpl");
 
 	@Autowired
 	private ViewingObjectRepository repository;
@@ -31,6 +35,7 @@ public class SeedDirServiceImpl implements SeedDirService {
 	 * @throws IOException if an IO error occurs
 	 */
 	public void fileFetch(String path, Owner user) throws IOException {
+		log.info("path = " + path);
 		Path rootpath = Path.of(path);
 		if (!Files.exists(rootpath)) {
 			return;
