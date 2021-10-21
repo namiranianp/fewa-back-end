@@ -21,7 +21,7 @@ public class DownloadFileController {
     ViewingObjectRepository repository;
 
 	@CrossOrigin(origins = "http://localhost")
-	@GetMapping(path = "/download")
+	@GetMapping(path = "/")
 	public void download(@RequestParam(value = "filePath") String filePath) {
         ViewingObject vo = repository.getByPath(filePath);
         if(vo.isVisible()) {
