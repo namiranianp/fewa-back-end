@@ -11,7 +11,6 @@ import com.usf.fewa.entity.ViewingObject;
 import com.usf.fewa.repository.ViewingObjectRepository;
 
 import com.usf.fewa.services.DownloadService;
-import com.usf.fewa.services.PreviewService;
 
 @RestController
 @RequestMapping(value = "download")

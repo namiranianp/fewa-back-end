@@ -11,11 +11,13 @@ import com.usf.fewa.services.SearchService;
 import com.usf.fewa.services.SeedDirService;
 import com.usf.fewa.services.TagService;
 import com.usf.fewa.services.TestService;
+import com.usf.fewa.services.DownloadService;
 import com.usf.fewa.services.impl.PreviewServiceImpl;
 import com.usf.fewa.services.impl.SearchServiceImpl;
 import com.usf.fewa.services.impl.SeedDirServiceImpl;
 import com.usf.fewa.services.impl.TagServiceImpl;
 import com.usf.fewa.services.impl.TestServiceImpl;
+import com.usf.fewa.services.impl.DownloadServiceImpl;
 
 @Configuration
 public class AppConfig {
