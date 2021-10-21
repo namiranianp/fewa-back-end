@@ -11,7 +11,11 @@ import com.usf.fewa.services.DownloadService;
 public class DownloadServiceImpl implements DownloadService {
 
 	@Override
-	public void download(String filename, String destination) throws IOException {
+	public void download(String filename) throws IOException {
+        //get destination for file
+        String home = System.getProperty("user.home");
+		String destination = home + "/Document/" + filename;
+		//Download File
 		try (InputStream inputStream = Files.newInputStream(Path.of(filename))) {
                   byte[] buffer = inputStream.readAllBytes();
                   OutputStream outStream = Files.newOutputStream(Path.of(destination));
