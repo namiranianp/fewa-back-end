@@ -19,6 +19,7 @@ public class DownloadFileController {
 
 	@Autowired
     ViewingObjectRepository repository;
+	DownloadService downloadService;
 
 	@CrossOrigin(origins = "http://localhost")
 	@GetMapping(path = "/")
