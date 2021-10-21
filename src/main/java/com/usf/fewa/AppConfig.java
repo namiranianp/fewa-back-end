@@ -43,6 +43,11 @@ public class AppConfig {
 	public SearchService searchService() {
 		return new SearchServiceImpl();
 	}
+	
+	@Bean
+	public PreviewService downloadService() {
+		return new DownloadServiceImpl();
+	}
 
 	@Bean
 	public String userDirLocation() {
