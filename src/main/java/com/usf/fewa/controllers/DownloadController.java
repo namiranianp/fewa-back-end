@@ -25,9 +25,10 @@ public class DownloadFileController {
         ViewingObject vo = repository.getByPath(filePath);
         //TODO get destination somehow
         String home = System.getProperty("user.home");
-        String destination = home + "/Desktop/targetFile.tmp";
+        String destination = home + "/Document/" + vo.getName();
         if(vo.isVisible()) {
             //TODO Download file
+            //TODO might have to download using frontend??
             downloadService.download(filePath, destination);
         } else {
             //TODO file not found error
