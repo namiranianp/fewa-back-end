@@ -25,6 +25,7 @@ public class DownloadFileController {
 
 	@Autowired
     ViewingObjectRepository repository;
+    @Autowired
 	DownloadService downloadService;
 
 	@CrossOrigin(origins = "http://localhost")
@@ -37,7 +38,7 @@ public class DownloadFileController {
             try {
                 log.info("beginning download path = " + filePath);
                 downloadService.download(filePath);
-                log.info("dowload path success= " + filePath);
+                log.info("download path success= " + filePath);
             }catch(IOException ioe){
                 System.out.println("could not download file");
             }
