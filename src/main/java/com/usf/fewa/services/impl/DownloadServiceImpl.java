@@ -13,25 +13,28 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 
 public class DownloadServiceImpl implements DownloadService {
 
-	private static Logger log = LogManager.getLogger("DownloadFileController");
-	
+	private static Logger log = LogManager.getLogger("DownloadServiceImpl");
+
 	@Override
 	public void download(String filename) throws IOException {
-		//get destination for file
-		log.info("creating home directory from = " + filename);
+        //get destination for file
+		log.info("path = " + filename);
         String home = System.getProperty("user.home");
+		//TODO: should it be Documents??
 		String destination = home + "/Document/" + filename;
 		log.info("done = " + home + "/Document/" + filename);
 		//Download File
 		log.info("beginning download = " + home + "/Document/" + filename);
 		try (InputStream inputStream = Files.newInputStream(Path.of(filename))) {
+			log.info("input stream created for path = " + filename);
 			byte[] buffer = inputStream.readAllBytes();
+			log.info("buffer created");
+			//TODO: outstream not being created, catching ioexception
 			OutputStream outStream = Files.newOutputStream(Path.of(destination));
+			log.info("output stream created for destination = " + destination);
 			outStream.write(buffer);
 
 			IOUtils.closeQuietly(outStream);
-				  
-			log.info("done downloading");
 		}
 	}
 
