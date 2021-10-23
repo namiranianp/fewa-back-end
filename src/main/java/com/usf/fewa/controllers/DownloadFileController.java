@@ -41,6 +41,7 @@ public class DownloadFileController {
                 return null;
             }
         } else {
+            log.info("file is not visible = " + vo.getName());
             return null;
         }
 	}
