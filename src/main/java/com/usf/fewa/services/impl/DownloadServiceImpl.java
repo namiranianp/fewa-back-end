@@ -26,5 +26,4 @@ public class DownloadServiceImpl implements DownloadService {
 			.contentType(MediaType.APPLICATION_OCTET_STREAM)
 			.body(resource);
 	}
-
 }
