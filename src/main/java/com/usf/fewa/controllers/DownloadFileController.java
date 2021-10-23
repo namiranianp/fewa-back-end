@@ -30,11 +30,14 @@ public class DownloadFileController {
 	@CrossOrigin(origins = "http://localhost")
 	@GetMapping(path = "/")
 	public ResponseEntity<InputStreamResource> download(@RequestParam(value = "filePath") String filePath){
+        log.info("path = " + filePath);
         ViewingObject vo = repository.getByPath(filePath);
         if (vo.isVisible()){
             try {
+                log.info("beginning download of path = " + vo.getName());
                 return downloadService.download(vo.getName());
             } catch (Exception e) {
+                log.info("could not download path = " + vo.getName());
                 return null;
             }
         } else {
