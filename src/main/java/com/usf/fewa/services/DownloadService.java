@@ -5,5 +5,5 @@ import org.springframework.core.io.InputStreamResource;
 import java.io.IOException;
 
 public interface DownloadService {
-	public abstract ResponseEntity<InputStreamResource> download(String filename) throws IOException;
+	public abstract ResponseEntity<InputStreamResource> download(String filePath) throws IOException;
 }

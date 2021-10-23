@@ -13,11 +13,12 @@ import org.springframework.core.io.InputStreamResource;
 
 import com.usf.fewa.entity.ViewingObject;
 import com.usf.fewa.repository.ViewingObjectRepository;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.usf.fewa.services.DownloadService;
 
 @RestController
-@RequestMapping(value = "download")
+@RequestMapping(value = "download", method = RequestMethod.GET)
 public class DownloadFileController {
 
     private static Logger log = LogManager.getLogger("DownloadFileController");
@@ -32,18 +33,13 @@ public class DownloadFileController {
 	public ResponseEntity<InputStreamResource> download(@RequestParam(value = "filePath") String filePath){
         log.info("path = " + filePath);
         ViewingObject vo = repository.getByPath(filePath);
-       // if (vo.isVisible()){
-            try {
-                log.info("beginning download of path = " + vo.getName());
-                return downloadService.download(filePath);
-            } catch (Exception e) {
-                log.info("could not download path = " + vo.getName());
-                return null;
-            }
-//        } else {
-//            log.info("file is not visible = " + vo.getName());
-//            return null;
-//        }
+        try {
+            log.info("beginning download of path = " + vo.getName());
+            return downloadService.download(filePath);
+        } catch (Exception e) {
+            log.info("could not download path = " + vo.getName());
+            return null;
+        }
 	}
 
 }
