@@ -1,6 +1,5 @@
 package com.usf.fewa.controllers;
 
-import com.usf.fewa.services.impl.DownloadServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
