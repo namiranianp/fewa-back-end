@@ -1,7 +1,5 @@
 package com.usf.fewa.services.impl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import org.springframework.http.ResponseEntity;
 import java.nio.file.Path;
@@ -13,10 +11,8 @@ import com.usf.fewa.services.DownloadService;
 
 public class DownloadServiceImpl implements DownloadService {
 
-	private static Logger log = LogManager.getLogger("DownloadServiceImpl");
-
 	@Override
-	public ResponseEntity download(String filePath) throws IOException {
+	public ResponseEntity<File> download(String filePath) throws IOException {
 		File file = Path.of(filePath).toFile();
 		String fileName = file.getName();
 		return ResponseEntity.ok()

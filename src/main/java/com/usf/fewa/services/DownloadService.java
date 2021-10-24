@@ -1,9 +1,9 @@
 package com.usf.fewa.services;
 import org.springframework.http.ResponseEntity;
-import org.springframework.core.io.InputStreamResource;
+import java.io.File;
 
 import java.io.IOException;
 
 public interface DownloadService {
-	public abstract ResponseEntity<InputStreamResource> download(String filePath) throws IOException;
+	public abstract ResponseEntity<File> download(String filePath) throws IOException;
 }
