@@ -6,8 +6,6 @@ import java.io.IOException;
 import org.springframework.http.ResponseEntity;
 import java.nio.file.Path;
 import java.io.File;
-import org.springframework.core.io.InputStreamResource;
-import java.io.FileInputStream;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
