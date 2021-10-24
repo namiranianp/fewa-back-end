@@ -15,7 +15,7 @@ import com.usf.fewa.entity.ViewingObject;
 import com.usf.fewa.repository.ViewingObjectRepository;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.usf.fewa.services.DownloadService;
+import com.usf.fewa.services.PreviewService;
 
 @RestController
 @RequestMapping(value = "download", method = RequestMethod.GET)
@@ -26,16 +26,16 @@ public class DownloadFileController {
 	@Autowired
     ViewingObjectRepository repository;
 	@Autowired
-	DownloadService downloadService;
+	PreviewService previewService;
 
 	@CrossOrigin(origins = "http://localhost")
 	@GetMapping(path = "/")
-	public ResponseEntity<InputStreamResource> download(@RequestParam(value = "filePath") String filePath){
+	public byte[] download(@RequestParam(value = "filePath") String filePath){
         log.info("path = " + filePath);
         ViewingObject vo = repository.getByPath(filePath);
         try {
             log.info("beginning download of path = " + vo.getName());
-            return downloadService.download(filePath);
+            return previewService.preview(filePath);
         } catch (Exception e) {
             log.info("could not download path = " + vo.getName());
             return null;

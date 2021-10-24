@@ -18,14 +18,12 @@ public class DownloadServiceImpl implements DownloadService {
 	private static Logger log = LogManager.getLogger("DownloadServiceImpl");
 
 	@Override
-	public ResponseEntity<InputStreamResource> download(String filePath) throws IOException {
+	public ResponseEntity download(String filePath) throws IOException {
 		File file = Path.of(filePath).toFile();
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-		return ResponseEntity
-			.ok()
-			.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
-			.contentLength(file.length())
-			.contentType(MediaType.APPLICATION_OCTET_STREAM)
-			.body(resource);
+		String fileName = file.getName();
+		return ResponseEntity.ok()
+				.contentType(MediaType.parseMediaType("application/octet-stream"))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+				.body(file);
 	}
 }
