@@ -1,7 +1,8 @@
 package com.usf.fewa.services;
-import org.springframework.http.ResponseEntity;
-import java.io.File;
 
+import org.springframework.http.ResponseEntity;
+
+import java.io.File;
 import java.io.IOException;
 
 public interface DownloadService {
