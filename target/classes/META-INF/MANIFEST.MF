@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Built-By: rileythompson
-Build-Jdk: 16.0.2
-Implementation-Title: fewa-back-end
-Implementation-Version: 1.0-SNAPSHOT
-Implementation-Vendor-Id: com.usf
-Implementation-URL: http://www.example.com
-Created-By: Maven Integration for Eclipse
-

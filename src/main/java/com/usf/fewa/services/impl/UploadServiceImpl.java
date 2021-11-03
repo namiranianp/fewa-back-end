@@ -16,14 +16,12 @@ import com.usf.fewa.services.UploadService;
 public class UploadServiceImpl implements UploadService {
     @Autowired
     ViewingObjectRepository repository;
-	@Autowired
-    Owner owner;
 
     @Override
     public ResponseEntity upload(String filePath, String uploadDirectory){
         File file = Path.of(filePath).toFile();
         String fileName = file.getName();
-        ViewingObject vo = new ViewingObject(fileName, filePath, owner);
+        ViewingObject vo = new ViewingObject(fileName, filePath, new Owner());
         
         repository.save(vo);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
