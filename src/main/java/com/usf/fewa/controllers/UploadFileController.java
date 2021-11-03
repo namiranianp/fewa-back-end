@@ -22,19 +22,19 @@ public class UploadFileController {
     @Autowired
     UploadService uploadService;
 
-	@CrossOrigin(origins = "http://localhost")
-	@GetMapping(path = "/")
-	public ResponseEntity uploadAll(@RequestParam(value = "filePath") String filePaths, @RequestParam(value = "uploadDirectory") String uploadDirectory){
-        List<String> fileDownloadUrls = new ArrayList<>();
-        Arrays.asList(filePaths)
-                .stream()
-                .forEach(filePath -> uploadService.upload(filePath, uploadDirectory));
-        return ResponseEntity.ok(fileDownloadUrls);
-    }
+//	@CrossOrigin(origins = "http://localhost")
+//	@GetMapping(path = "/")
+//	public ResponseEntity uploadAll(@RequestParam(value = "filePath") String filePaths, @RequestParam(value = "uploadDirectory") String uploadDirectory){
+//        List<String> fileDownloadUrls = new ArrayList<>();
+//        Arrays.asList(filePaths)
+//                .stream()
+//                .forEach(filePath -> uploadService.upload(filePath, uploadDirectory));
+//        return ResponseEntity.ok(fileDownloadUrls);
+//    }
 
 	@CrossOrigin(origins = "http://localhost")
 	@GetMapping(path = "/")
-	public ResponseEntity upload(@RequestParam(value = "filePath") String filePath, @RequestParam(value = "uploadDirectory") String uploadDirectory){
+	public ResponseEntity uploadFile(@RequestParam(value = "filePath") String filePath, @RequestParam(value = "uploadDirectory") String uploadDirectory){
         return uploadService.upload(filePath, uploadDirectory);
     }
 }
