@@ -16,7 +16,7 @@ import java.util.List;
 import com.usf.fewa.services.UploadService;
 
 @RestController
-@RequestMapping(value = "upload", method = RequestMethod.GET)
+@RequestMapping(value = "upload", method = RequestMethod.POST)
 public class UploadFileController {
 
     @Autowired
