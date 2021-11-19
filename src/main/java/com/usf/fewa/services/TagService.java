@@ -8,4 +8,6 @@ public interface TagService {
 	public void removeTag(String filePath, String tagName, Owner owner);
 
 	public String displayTag(String filePath);
+
+	public String getSuggestedFiles(String file);
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -25,13 +26,14 @@ public class SeedDirServiceImpl implements SeedDirService {
 	@Override
 	/**
 	 * Fetch all files from a path(String)
-	 * 
+	 *
 	 * @param path the root directory
 	 * @param user the user using this service
 	 * @throws IOException if an IO error occurs
 	 */
 	public void fileFetch(String path, Owner user) throws IOException {
-		Path rootpath = Path.of(path);
+		//File file = new File(path);
+		Path rootpath = Paths.get(path);
 		if (!Files.exists(rootpath)) {
 			return;
 		}
@@ -50,7 +52,7 @@ public class SeedDirServiceImpl implements SeedDirService {
 
 	/**
 	 * List files and directories in json format such as ls command in the specific directory.
-	 * 
+	 *
 	 * @param path the directory
 	 * @return the json format stirng
 	 * @throws IOException if an IO error occurs
@@ -64,50 +66,50 @@ public class SeedDirServiceImpl implements SeedDirService {
 		// C://desktop/d1/d2/test.txt   !=     C://desktop/d1 + / + test.txt
 		return listToJson(list);
 	}
-	
+
 	/**
 	 * List files and directories in json format as below:
-	 * 
+	 *
 	 * for example:
 	 * {
-	    	"files": [
-		        {
-		            "fullName": "1.jpg",
-		            "type": "file",
-		            "extension": "jpg"
-		        },
-		        {
-		            "fullName": "desktop.ini",
-		            "type": "file",
-		            "extension": "ini"
-		        }
-		    ]
-		}
-		
-		@param list the collection of files
-		@return json format
+	 "files": [
+	 {
+	 "fullName": "1.jpg",
+	 "type": "file",
+	 "extension": "jpg"
+	 },
+	 {
+	 "fullName": "desktop.ini",
+	 "type": "file",
+	 "extension": "ini"
+	 }
+	 ]
+	 }
+
+	 @param list the collection of files
+	 @return json format
 	 */
 	public static String listToJson(Collection<? extends ViewingObject> list) {
 		String res = "{\"files\":[";
 		Iterator<? extends ViewingObject> it = list.iterator();
 		if (it.hasNext()) {
-			res += getOnefileJson(it.next());
+			res += getOneFileJson(it.next());
 		}
 		while (it.hasNext()) {
 			res += ",";
-			res += getOnefileJson(it.next());
+			res += getOneFileJson(it.next());
 		}
 		res += "]}";
 		return res;
 	}
 
 	/**
-	 * Generate one file json including: name, file or directory, extension. 
-	 * 
+	 * Generate one file json including: name, file or directory, extension.
+	 *
 	 * @param vo the file object
 	 * @return the json format string
 	 */
-	public static String getOnefileJson(ViewingObject vo) {
+	public static String getOneFileJson(ViewingObject vo) {
 		String filename = vo.getName();
 		String DIR = "file";
 		if (Files.isDirectory(Path.of(vo.getPath()))) { // might modify to fileFetch
@@ -119,7 +121,7 @@ public class SeedDirServiceImpl implements SeedDirService {
 
 	/**
 	 * Get the file extension by filename.
-	 * 
+	 *
 	 * @param filename the file name
 	 * @return the extension
 	 */

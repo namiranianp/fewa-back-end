@@ -19,18 +19,23 @@ public class TagController {
 	@CrossOrigin(origins = "http://localhost")
 	@GetMapping(path = "/add")
 	public void addTag(@RequestParam(value = "tagName") String tagName,
-			@RequestParam(value = "filePath") String filePath) {
+					   @RequestParam(value = "filePath") String filePath) {
 		tagService.addTag(filePath, tagName, null);
 	}
 
 	@GetMapping(path = "/remove")
 	public void removeTag(@RequestParam(value = "tagName") String tagName,
-			@RequestParam(value = "filePath") String filePath) {
+						  @RequestParam(value = "filePath") String filePath) {
 		tagService.removeTag(filePath, tagName, null);
 	}
 	@GetMapping(path = "/display", produces = "application/json")
 	public String displayTag(@RequestParam(value = "filePath") String filePath) {
+		tagService.getSuggestedFiles(filePath);
 		return tagService.displayTag(filePath);
 	}
 
+	@GetMapping(path = "/suggest", produces = "application/json")
+	public String suggestedFiles(@RequestParam(value = "filePath") String filePath) {
+		return tagService.getSuggestedFiles(filePath);
+	}
 }
