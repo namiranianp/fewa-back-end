@@ -2,7 +2,7 @@ package com.usf.fewa.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class UploadFileController {
     UploadService uploadService;
 
 	@CrossOrigin(origins = "http://localhost")
-    @GetMapping(path = "/file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity uploadFile(MultipartFile file){
         return uploadService.upload(file);
     }

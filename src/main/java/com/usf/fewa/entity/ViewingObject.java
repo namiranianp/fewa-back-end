@@ -23,6 +23,8 @@ public class ViewingObject {
 
 	private boolean visible = true;
 
+	private byte[] file;
+
 	@ManyToMany(targetEntity = Tag.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "viewingobject_tag", joinColumns = @JoinColumn(name = "vid"), inverseJoinColumns = @JoinColumn(name = "tid"))
 	private Set<Tag> tagSet = new HashSet<>();
@@ -89,6 +91,14 @@ public class ViewingObject {
 	public void removeTag(Tag tag) {
 		tagSet.remove(tag);
 		tag.getViewingObjSet().remove(this);
+	}
+
+	public void setFile(byte[] file) {
+		this.file = file;
+	}
+
+	public byte[] getFile() {
+		return this.file;
 	}
 
 	@Override
