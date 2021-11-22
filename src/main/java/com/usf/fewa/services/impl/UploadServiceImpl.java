@@ -4,10 +4,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.usf.fewa.entity.ViewingObject;
-
 import java.io.IOException;
 
+import com.usf.fewa.entity.ViewingObject;
 import com.usf.fewa.entity.Owner;
 import com.usf.fewa.repository.ViewingObjectRepository;
 
@@ -26,10 +25,8 @@ public class UploadServiceImpl implements UploadService {
 
     @Override
     public ResponseEntity upload(MultipartFile file){
-        log.info("Start-----");
-        log.info("Path: " + file.getOriginalFilename());
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        log.info("fileName: " + fileName);
+        String filePath = file.getOriginalFilename();
+        String fileName = StringUtils.cleanPath(filePath);
         ViewingObject vo = new ViewingObject(fileName, file.getOriginalFilename(), new Owner("random", "random"));
         try {
             vo.setFile(file.getBytes());
@@ -39,8 +36,8 @@ public class UploadServiceImpl implements UploadService {
         repository.save(vo);
         
         String fileUploadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/files/download/")
-                .path(fileName)
+                .path("/download/?filePath=")
+                .path(filePath)
                 .toUriString();
         return ResponseEntity.ok(fileUploadUri);
     }

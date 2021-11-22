@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "viewingobject", uniqueConstraints = { @UniqueConstraint(columnNames = "path") })
 public class ViewingObject {
@@ -23,6 +25,7 @@ public class ViewingObject {
 
 	private boolean visible = true;
 
+	@Type(type="org.hibernate.type.BinaryType") 
 	private byte[] file;
 
 	@ManyToMany(targetEntity = Tag.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
