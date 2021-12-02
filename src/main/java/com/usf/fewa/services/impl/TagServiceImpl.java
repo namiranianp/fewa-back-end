@@ -93,7 +93,7 @@ public class TagServiceImpl implements TagService {
 		// we don't want to suggest the currently viewed file.
 		voSet.remove(vo);
 
-		return SeedDirServiceImpl.listToJson(voSet);
+		return SeedDirServiceImpl.listToJsonWithPath(voSet);
 	}
 
 }

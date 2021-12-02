@@ -103,6 +103,22 @@ public class SeedDirServiceImpl implements SeedDirService {
 		return res;
 	}
 
+
+	public static String listToJsonWithPath(Collection<? extends ViewingObject> list) {
+		String res = "{\"files\":[";
+		Iterator<? extends ViewingObject> it = list.iterator();
+		if (it.hasNext()) {
+			res += getOneFileJsonWithPath(it.next());
+		}
+		while (it.hasNext()) {
+			res += ",";
+			res += getOneFileJsonWithPath(it.next());
+		}
+		res += "]}";
+		return res;
+	}
+
+
 	/**
 	 * Generate one file json including: name, file or directory, extension.
 	 *
@@ -118,6 +134,19 @@ public class SeedDirServiceImpl implements SeedDirService {
 		return "{\"fullName\":\"" + filename + "\", \"type\":\"" + DIR + "\",\"extension\":\""
 				+ getExtensionByStringHandling(filename) + "\"}";
 	}
+
+
+	public static String getOneFileJsonWithPath(ViewingObject vo) {
+		String filename = vo.getName();
+		String DIR = "file";
+		if (Files.isDirectory(Path.of(vo.getPath()))) { // might modify to fileFetch
+			DIR = "directory";
+		}
+		return "{\"fullName\":\"" + filename + "\", \"type\":\"" + DIR + "\",\"extension\":\""
+				+ getExtensionByStringHandling(filename) + "\",\"path\":\""
+				+ vo.getPath() + "\"}";
+	}
+
 
 	/**
 	 * Get the file extension by filename.
