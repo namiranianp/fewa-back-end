@@ -26,19 +26,23 @@ public class UploadServiceImpl implements UploadService {
     @Override
     public ResponseEntity upload(MultipartFile file){
         String filePath = file.getOriginalFilename();
-        String fileName = StringUtils.cleanPath(filePath);
-        ViewingObject vo = new ViewingObject(fileName, file.getOriginalFilename(), new Owner("random", "random"));
-        try {
-            vo.setFile(file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
+        log.info(filePath);
+        if (repository.findByPathLike(filePath).isEmpty()){
+            String fileName = StringUtils.cleanPath(filePath);
+            ViewingObject vo = new ViewingObject(fileName, file.getOriginalFilename(), new Owner("random", "random"));
+            try {
+                vo.setFile(file.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            repository.save(vo);
         }
-        repository.save(vo);
-        
+
         String fileUploadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/?filePath=")
                 .path(filePath)
                 .toUriString();
         return ResponseEntity.ok(fileUploadUri);
+        
     }
 }

@@ -15,19 +15,19 @@ import java.util.List;
 
 import com.usf.fewa.services.UploadService;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @CrossOrigin(origins = "http://localhost")
 @RestController
 public class UploadFileController {
+    private static Logger log = LogManager.getLogger("UploadFileController");
 
     @Autowired
     UploadService uploadService;
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity uploadFile(@RequestBody MultipartFile[] files){
-        List<Object> fileDownloadUrls = new ArrayList<>();
-        Arrays.asList(files)
-                .stream()
-                .forEach(file -> fileDownloadUrls.add(uploadService.upload(file).getBody()));
-        return ResponseEntity.ok(fileDownloadUrls);
+	public ResponseEntity uploadFile(@RequestBody MultipartFile file){
+        return uploadService.upload(file);
     }
 }
