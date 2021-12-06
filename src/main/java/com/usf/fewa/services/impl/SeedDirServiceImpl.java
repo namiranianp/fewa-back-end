@@ -10,10 +10,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.validation.constraints.Null;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.None;
 import com.usf.fewa.entity.Owner;
 import com.usf.fewa.entity.ViewingObject;
 import com.usf.fewa.repository.ViewingObjectRepository;
@@ -146,7 +149,7 @@ public class SeedDirServiceImpl implements SeedDirService {
 	public String DatabaseToJson(Owner User) throws IOException {
 		List<ViewingObject> list = repository.findAll();
 		list.removeIf(e -> !e.isVisible());
-		log.info(list.size());
+		list.removeIf(e -> e.getFile() == null);
 		return listToJson(list);
 	}
 
