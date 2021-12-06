@@ -136,4 +136,18 @@ public class SeedDirServiceImpl implements SeedDirService {
 		return filename.substring(lastIndexOf + 1);
 	}
 
+	/**
+	 * List files in json format in the database.
+	 * 
+	 * @param user the directory
+	 * @return the json format stirng
+	 * @throws IOException if an IO error occurs
+	 */
+	public String DatabaseToJson(Owner User) throws IOException {
+		List<ViewingObject> list = repository.findAll();
+		list.removeIf(e -> !e.isVisible());
+		log.info(list.size());
+		return listToJson(list);
+	}
+
 }

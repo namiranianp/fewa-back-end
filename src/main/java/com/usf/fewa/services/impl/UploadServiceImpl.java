@@ -26,7 +26,6 @@ public class UploadServiceImpl implements UploadService {
     @Override
     public ResponseEntity upload(MultipartFile file){
         String filePath = file.getOriginalFilename();
-        log.info(filePath);
         if (repository.findByPathLike(filePath).isEmpty()){
             String fileName = StringUtils.cleanPath(filePath);
             ViewingObject vo = new ViewingObject(fileName, file.getOriginalFilename(), new Owner("random", "random"));

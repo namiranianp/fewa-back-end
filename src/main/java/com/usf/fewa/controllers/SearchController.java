@@ -27,5 +27,4 @@ public class SearchController {
 	public String searchByTag(@RequestParam(value = "tag") String tagName) {
 		return searchService.SearchByTagName(tagName);
 	}
-
 }

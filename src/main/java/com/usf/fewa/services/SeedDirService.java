@@ -8,4 +8,7 @@ public interface SeedDirService {
 	public void fileFetch(String path, Owner user) throws IOException;
 
 	public String listFileToJson(String path) throws IOException;
+
+	public String DatabaseToJson(Owner User) throws IOException;
+
 }

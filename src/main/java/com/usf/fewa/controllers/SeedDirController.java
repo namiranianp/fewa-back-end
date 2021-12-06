@@ -40,4 +40,15 @@ public class SeedDirController {
 		}
 	}
 
+	@CrossOrigin(origins = "http://localhost")
+	@GetMapping(path = "/database", produces = "application/json")
+	public String getDatabase(@RequestParam(value = "dir", defaultValue = "/") String dir) {
+		try {
+			return seedDirService.DatabaseToJson(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
+	}
+
 }
