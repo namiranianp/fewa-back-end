@@ -6,5 +6,5 @@ import java.io.File;
 import java.io.IOException;
 
 public interface DownloadService {
-	public abstract ResponseEntity<File> download(String filePath) throws IOException;
+	public abstract byte[] download(String filePath) throws IOException;
 }

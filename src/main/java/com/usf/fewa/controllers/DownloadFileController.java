@@ -30,6 +30,7 @@ public class DownloadFileController {
 	@GetMapping(path = "/")
 	public byte[] download(@RequestParam(value = "filePath") String filePath){
         log.info("path = " + filePath);
+		filePath = filePath.replaceFirst("files/database/", "");
         ViewingObject vo = repository.getByPath(filePath);
         try {
             log.info("beginning download of path = " + vo.getName());
