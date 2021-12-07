@@ -26,6 +26,12 @@ public class PreviewController {
 		return previewService.preview(file);
 	}
 
+	@CrossOrigin(origins = "http://localhost")
+	@RequestMapping(value = "mp3", method = RequestMethod.GET, produces = "audio/basic")
+	public @ResponseBody byte[] getMP3(@RequestParam(value = "file") String file) throws IOException {
+		return previewService.preview(file);
+	}
+
 	@RequestMapping(value = "pdf", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
 	public @ResponseBody byte[] getPDF(@RequestParam(value = "file") String file) throws IOException {
 		return previewService.preview(file);
